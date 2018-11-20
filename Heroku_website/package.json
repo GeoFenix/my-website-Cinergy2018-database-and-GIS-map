@@ -1,0 +1,15 @@
+{
+  "name": "Cinergy2018",
+  "version": "1.0.0",
+  "description": "Cinergy2018",
+  "main": "index.js",
+  "dependencies": {
+    "node-static": "^0.7.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Jolanta Pilch",
+  "license": "ISC"
+}
