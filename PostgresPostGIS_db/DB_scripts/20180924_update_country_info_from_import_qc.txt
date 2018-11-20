@@ -1,0 +1,14 @@
+DECLARE
+BEGIN
+	UPDATE gpractice_info_geom_db
+	SET 
+	qc_status = gpractice_info_import_qc.qc_status, 
+	date_qc= gpractice_info_import_qc.date_qc,
+	qc_auth_id= gpractice_info_import_qc.qc_auth_id
+	FROM gpractice_info_import_qc
+	WHERE gpractice_info_geom_db.count_name= gpractice_info_import_qc.count_name;
+	RETURN null;
+END
+
+-- Wywolanie funkcji
+SELECT public.update_gpractice_info_from_import_qc();

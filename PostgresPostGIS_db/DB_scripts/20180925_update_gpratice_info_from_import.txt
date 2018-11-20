@@ -1,0 +1,37 @@
+DECLARE
+rows_to_update RECORD;
+BEGIN
+	SELECT * INTO rows_to_update FROM gpractice_info_geom_import, gpractice_info_geom_db
+	WHERE gpractice_info_geom_import."country na" = gpractice_info_geom_db.count_name 
+	AND gpractice_info_geom_import."id good pr" = gpractice_info_geom_db.id_gpractice;
+	IF NOT FOUND
+	THEN
+		INSERT INTO gpractice_info_geom_db(geom, date_adding, id_author, id_gpractice, gpractice_name, count_name, "region/city",
+			gprac_info1, gprac_info2)
+			SELECT geom, sygnatura, "id author", "id good pr", "good pract", "country na", "region/cit", addrtype, addrlocat   
+			FROM gpractice_info_geom_import;
+	ELSE
+		UPDATE gpractice_info_geom_db
+		SET 
+		geom= gpractice_info_geom_import.geom, 
+		id_author= gpractice_info_geom_import."id author", 
+		id_gpractice= gpractice_info_geom_import."id good pr", 
+		gpractice_name= gpractice_info_geom_import."good pract", 
+		count_name= gpractice_info_geom_import."country na", 
+		"region/city"= gpractice_info_geom_import."region/cit",
+		gprac_info1= gpractice_info_geom_import.addrtype, 
+		gprac_info2= gpractice_info_geom_import.addrlocat,
+		date_updating= gpractice_info_geom_import.sygnatura::timestamp without time zone 
+		FROM gpractice_info_geom_import
+		WHERE gpractice_info_geom_import."country na" = gpractice_info_geom_db.count_name 
+		AND gpractice_info_geom_import."id good pr" = gpractice_info_geom_db.id_gpractice;
+	END IF;
+RETURN NULL;
+END
+
+
+
+
+
+-- Wywołanie funkcji
+SELECT public.update_gpratice_info_from_import()

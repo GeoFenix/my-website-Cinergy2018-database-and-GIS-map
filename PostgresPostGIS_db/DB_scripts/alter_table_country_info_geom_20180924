@@ -1,0 +1,33 @@
+
+ALTER TABLE country_info_geom_db RENAME COLUMN count_info TO count_info1; 
+
+ALTER TABLE country_info_geom_db ADD COLUMN count_info2 TEXT;
+
+ALTER TABLE country_info_geom_db ADD COLUMN date_adding TIMESTAMP WITHOUT TIME ZONE; 
+
+ALTER TABLE country_info_geom_db ADD COLUMN date_updating TIMESTAMP WITHOUT TIME ZONE;
+
+ALTER TABLE country_info_geom_db RENAME COLUMN status TO  qc_status; 
+
+ALTER TABLE country_info_geom_db ADD COLUMN status VARCHAR(20); 
+
+ALTER TABLE country_info_geom_db ADD COLUMN date_qc TIMESTAMP WITHOUT TIME ZONE; 
+
+ALTER TABLE country_info_geom_db ADD COLUMN qc_auth_id INT;
+
+ALTER TABLE country_info_geom_db DROP COLUMN qc_auth_id;
+
+TRUNCATE TABLE country_info_import_qc;
+
+UPDATE public.country_info_geom_db
+SET 
+id_author = country_info_import_db.id_author, 
+count_info1=country_info_import_db.count_info_pdf,
+count_info2=country_info_import_db.count_info_word,
+date_adding=country_info_import_db.date_adding,
+status='to_qc'
+FROM country_info_import_db
+WHERE country_info_geom_db.count_name=country_info_import_db.count_name;
+
+
+

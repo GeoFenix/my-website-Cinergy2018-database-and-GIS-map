@@ -1,0 +1,56 @@
+
+DECLARE
+rows_to_update RECORD;
+BEGIN
+	UPDATE public.country_info_geom_db
+	SET 
+	id_author = country_info_import_db.id_author, 
+	count_info1=country_info_import_db.count_info_pdf,
+	count_info2=country_info_import_db.count_info_word
+	FROM country_info_import_db
+	WHERE country_info_geom_db.count_name=country_info_import_db.count_name;
+	SELECT date_adding INTO rows_to_update FROM country_info_import_db
+	WHERE country_info_geom_db.count_name=country_info_import_db.count_name;
+	IF NOT FOUND
+	THEN 
+	 UPDATE public.country_info_geom_db
+	 SET date_adding=country_info_import_db.date_adding
+	 FROM country_info_import_db
+	 WHERE country_info_geom_db.count_name=country_info_import_db.count_name;
+	ELSE
+	 UPDATE public.country_info_geom_db
+	 SET date_updating=country_info_import_db.date_adding
+	 FROM country_info_import_db
+	 WHERE country_info_geom_db.count_name=country_info_import_db.count_name;
+	END IF;
+END
+
+-- Wywolanie funkcji
+SELECT public.update_country_info_from_import();
+
+DECLARE
+rows_to_update RECORD;
+BEGIN
+	UPDATE public.country_info_geom_db
+	SET 
+	id_author = country_info_import_db.id_author, 
+	count_info1=country_info_import_db.count_info_pdf,
+	count_info2=country_info_import_db.count_info_word
+	FROM country_info_import_db
+	WHERE country_info_geom_db.count_name=country_info_import_db.count_name;
+	SELECT country_info_geom_db.date_adding INTO rows_to_update FROM country_info_geom_db,country_info_import_db
+	WHERE country_info_geom_db.count_name=country_info_import_db.count_name AND country_info_geom_db.date_adding IS NOT NULL;
+	IF NOT FOUND
+	THEN 
+	 UPDATE public.country_info_geom_db
+	 SET date_adding=country_info_import_db.date_adding
+	 FROM country_info_import_db
+	 WHERE country_info_geom_db.count_name=country_info_import_db.count_name;
+	ELSE
+	 UPDATE public.country_info_geom_db
+	 SET date_updating=country_info_import_db.date_adding
+	 FROM country_info_import_db
+	 WHERE country_info_geom_db.count_name=country_info_import_db.count_name;
+	END IF;
+RETURN NULL;
+END

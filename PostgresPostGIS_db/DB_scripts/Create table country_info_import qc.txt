@@ -1,0 +1,12 @@
+CREATE TABLE country_info_import_qc (
+	id SERIAL,
+	date_adding TIMESTAMP WITHOUT TIME ZONE, 
+	count_name VARCHAR(50),
+	id_author INT,
+	count_info_pdf TEXT,
+	count_info_word TEXT,
+	qc_status VARCHAR(20),
+	date_qc TIMESTAMP WITHOUT TIME ZONE,
+	qc_auth_id INT,
+	CONSTRAINT country_info_import_pkey PRIMARY KEY (id)
+)
