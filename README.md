@@ -67,8 +67,6 @@ how to use the online GIS map application.
 
 :+1: Support me with stars, good advice and keep your fingers crossed for my future in IT :smiley: 
 
-![alt tag](src/mapbrowser.png)
-
 ## License 
 
 [MIT](LICENSE.txt) license
