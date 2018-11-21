@@ -13,7 +13,7 @@ The website is available on:
 This is a working version of the website, database and GIS map application. Because the project realisation time was very tight I developed 
 a temporary framework which I wish to upgrade in the future. 
 The current solutions is based on the open-source software and platforms, however, they are not enough integrated to avoid manual 
-data manipulation. 
+data transfer and manipulation. 
 
 ![alt tag](src/workflow_schema.png) 
 
@@ -25,7 +25,7 @@ data manipulation.
 
 ## Example of code
 As this is my really first website it is written with a very basic and simple html and css. 
-It will be also improved and optimized with project further project upgrade. 
+It will be also improved and optimized with further project upgrade. 
 
 ``` 
 <header>
@@ -70,8 +70,10 @@ how to use the online GIS map application.
 ## License 
 
 [MIT](LICENSE.txt) license
-[GNU](LICENSE.txt) license
+<br/> [GNU](LICENSE.txt) license
 
 ## Special thanks 
 
 Special thanks to Climate-KIC organization which enabled me to develop this project :smiley:
+"This project was realized during the Pioneers into Practice programme. Pioneers into Practice is a programme of EIT Climate-KIC. 
+EIT Climate-KIC is supported by the EIT, a body of the European Union."
